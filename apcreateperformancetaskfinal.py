@@ -1,6 +1,3 @@
-# SAFE VERSION 1: Everything should work except that the total score (correct/total) is messed up when a subtopic total is calculated, instead
-# is uses the total from the first time
-# problem: correct_answers is list and variabel!!!
 # AP CSP CREATE PERFORMANCE TASK V1
 import random, time, math
 
