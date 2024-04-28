@@ -1,5 +1,6 @@
-# AP CSP CREATE PERFORMANCE TASK V1
-import random, time, math
+
+# AP CSP CREATE PERFORMANCE TASK FINAL;
+import random, time
 
 # Define dictionaries to store problems and solutions for each math section
 problem_library = {
@@ -125,6 +126,8 @@ def quantity_select():
         else:
             print("Please select a valid number.")
 
+    ask_questions(quantity_q)
+
 
 def print_with_delay(word, delay=0.2):
     for letter in word:
@@ -178,10 +181,10 @@ def print_topics_separated():
 
     print("Algebra topics:", ', '.join(algebra_topics))
     print("Geometry topics:", ', '.join(geometry_topics))
-    print("Calculus topics:", ', '.join(calculus_topics))
+    print("Calculus topics:", ', '.join(calculus_topics)) # aesthetic choice
+# Hello college board :) -- ask questions function
 
-
-def ask_questions():
+def ask_questions(question_quantity):
     global math_field
     global quantity_q
     global correct_answers
@@ -191,9 +194,8 @@ def ask_questions():
     # Initialize dictionaries to track performance of subtopics
     good_topics = {subtopic: 0 for subtopic in problem_library[math_field]}
     bad_topics = {subtopic: 0 for subtopic in problem_library[math_field]}
-    total_questions = quantity_q  # Total number of questions asked
 
-    for i in range(quantity_q):  # Will ask the right number of questions
+    for i in range(question_quantity):  # Will ask the right number of questions
         subtopic = random.choice(list(problem_library[math_field].keys()))  # Choose a random subtopic
 
         print(colors.RESET, "\n")
@@ -221,7 +223,7 @@ def ask_questions():
             bad_topics[subtopic] += 1
 
 
-    evaluation()
+    evaluation(question_quantity)
     subtopic_weak = []
 
     print("")
@@ -267,16 +269,12 @@ def ask_questions_in_subtopic(subtopic, num_questions):
     global correct_answers
     global correct
     global incorrect
-    global quantity_q
 
     correct_answers = 0
+
     correct = []  # Initialize list to store correct answers
     incorrect = []  # Initialize list to store incorrect answers
 
-
-
-    total_questions = num_questions  # Total number of questions asked
-    quantity_q = total_questions
     for i in range(num_questions):  # Will ask the right number of questions
         print(colors.RESET, "\n")
         print("---------------------------------------------------------------")
@@ -302,10 +300,10 @@ def ask_questions_in_subtopic(subtopic, num_questions):
             incorrect.append((question_now, solution_now, response))
 
 
-    evaluation()
+    evaluation(num_questions)
 
 
-def evaluation():
+def evaluation(num_questions):
     print("\n\n")
     print("---------------------------------------------------------------")
     print("")
@@ -329,8 +327,8 @@ def evaluation():
     print(colors.RESET, "\n ---------------------------------------------------------------")
     print("")
     print(colors.BRIGHT_YELLOW, "Total Correct Answers:", colors.BRIGHT_GREEN, correct_answers, colors.RESET,
-          "out of", colors.BRIGHT_BLUE, quantity_q)
-    print(colors.BRIGHT_YELLOW, "SCORE: ", colors.RESET, round((100 * (correct_answers / quantity_q)), 2), "%", sep="")
+          "out of", colors.BRIGHT_BLUE, num_questions)
+    print(colors.BRIGHT_YELLOW, "SCORE: ", colors.RESET, round((100 * (correct_answers / num_questions)), 2), "%", sep="")
     print("")
     print(" ---------------------------------------------------------------")
 
@@ -353,7 +351,7 @@ class colors:
     BRIGHT_CYAN = '\033[96m'
     ORANGE = '\033[38;5;208m'
     RESET = '\033[0m'
-    PINK = '\033[95m'
+    PINK = '\033[95m'#aesthetic choice
 
 
 # Main Loop
@@ -371,4 +369,4 @@ while True:
     select_math()
     print_with_delay(math_field.upper())
     quantity_select()
-    ask_questions()
+
